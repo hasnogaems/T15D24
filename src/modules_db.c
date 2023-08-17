@@ -13,7 +13,10 @@ int main() {
         printf("4. INSERT into master_levels.db\n");
         printf("5. INSERT into master_modules.db\n");
         printf("6. INSERT into master_status_events.db\n");
-        printf("7. EXIT\n");
+        printf("7. UPDATE module in master_levels.db\n");
+        printf("8. UPDATE module in master_modules.db\n");
+        printf("9. UPDATE module in master_status_events.db\n");
+        printf("10. EXIT\n");
         printf("Choose a menu option: \n");
 
         scanf("%d", &choice);
@@ -44,6 +47,18 @@ int main() {
                 insert(filename);
                 break;
             case 7:
+                filename = "master_levels.db";
+                update(filename);
+                break;
+            case 8:
+                filename = "master_modules.db";
+                update(filename);
+                break;
+            case 9:
+                filename = "master_status_events.db";
+                update(filename);
+                break;
+            case 10:
                 printf("Exiting...\n");
                 return 0;
             default:

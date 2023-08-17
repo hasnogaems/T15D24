@@ -52,7 +52,7 @@ void insert(const char *filename) {
     fclose(fp);
 }
 
-/*void update() {
+void update(const char *filename) {
     FILE *fp;
     MODULES mod;
     int id, isFound = 0;
@@ -60,7 +60,7 @@ void insert(const char *filename) {
     printf("Enter the ID of the module you want to update:\n");
     scanf("%d", &id);
 
-    fp = fopen("modules.bin", "rb+");
+    fp = fopen(filename, "rb+");
 
     if (fp == NULL) {
         printf("Could not open file.\n");
@@ -69,9 +69,21 @@ void insert(const char *filename) {
 
     while (fread(&mod, sizeof(MODULES), 1, fp)) {
         if (mod.moduleID == id) {
-            printf("Enter new details (ID, Name, Memory Level, Cell Number, Deletion Flag):\n");
-            scanf("%d %1000s %d %d %d", &mod.moduleID, mod.moduleName, &mod.memoryLevel, &mod.cellNumber,
-                  &mod.deletionFlag);
+            printf("Enter new ID:\n");
+            scanf("%d", &mod.moduleID);
+
+            printf("Enter new Name (up to 20 characters):\n");
+            scanf("%s", mod.moduleName);
+
+            printf("Enter new Memory Level:\n");
+            scanf("%d", &mod.memoryLevel);
+
+            printf("Enter new Cell Number:\n");
+            scanf("%d", &mod.cellNumber);
+
+            printf("Enter new Deletion Flag:\n");
+            scanf("%d", &mod.deletionFlag);
+
             fseek(fp, -sizeof(MODULES), SEEK_CUR);
             fwrite(&mod, sizeof(MODULES), 1, fp);
             isFound = 1;
@@ -84,7 +96,8 @@ void insert(const char *filename) {
     }
 
     fclose(fp);
-}*/
+}
+
 /*void delete () {
     FILE *fp;
     MODULES mod;
