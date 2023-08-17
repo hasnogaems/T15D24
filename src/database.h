@@ -25,7 +25,7 @@ typedef struct {
 
 void select();
 void update();
-void delete ();
+// void delete ();
 void insert();
 MODULES read_record_from_MODULES(FILE *pfile, int index);
 int get_file_size_in_bytes(FILE *pfile);

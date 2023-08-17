@@ -19,15 +19,28 @@ void select(char *filename) {
 
     fclose(fp);
 }
-void insert() {
+void insert(const char *filename) {
     FILE *fp;
     MODULES mod;
 
-    printf("Enter the module details (ID, Name, Memory Level, Cell Number, Deletion Flag):\n");
-    scanf("%d %s %d %d %d", &mod.moduleID, mod.moduleName, &mod.memoryLevel, &mod.cellNumber,
-          &mod.deletionFlag);
+    printf("Enter the module details:\n");
 
-    fp = fopen("modules.bin", "ab");
+    printf("ID: ");
+    scanf("%d", &mod.moduleID);
+
+    printf("Name: ");
+    scanf("%10000s", mod.moduleName);
+
+    printf("Memory Level: ");
+    scanf("%d", &mod.memoryLevel);
+
+    printf("Cell Number: ");
+    scanf("%d", &mod.cellNumber);
+
+    printf("Deletion Flag (1 for true, 0 for false): ");
+    scanf("%d", &mod.deletionFlag);
+
+    fp = fopen(filename, "ab");
 
     if (fp == NULL) {
         printf("Could not open file.\n");
@@ -35,10 +48,11 @@ void insert() {
     }
 
     fwrite(&mod, sizeof(MODULES), 1, fp);
+    printf("Data inserted successfully into %s.\n", filename);
     fclose(fp);
 }
 
-void update() {
+/*void update() {
     FILE *fp;
     MODULES mod;
     int id, isFound = 0;
@@ -56,7 +70,7 @@ void update() {
     while (fread(&mod, sizeof(MODULES), 1, fp)) {
         if (mod.moduleID == id) {
             printf("Enter new details (ID, Name, Memory Level, Cell Number, Deletion Flag):\n");
-            scanf("%d %s %d %d %d", &mod.moduleID, mod.moduleName, &mod.memoryLevel, &mod.cellNumber,
+            scanf("%d %1000s %d %d %d", &mod.moduleID, mod.moduleName, &mod.memoryLevel, &mod.cellNumber,
                   &mod.deletionFlag);
             fseek(fp, -sizeof(MODULES), SEEK_CUR);
             fwrite(&mod, sizeof(MODULES), 1, fp);
@@ -70,8 +84,8 @@ void update() {
     }
 
     fclose(fp);
-}
-void delete () {
+}*/
+/*void delete () {
     FILE *fp;
     MODULES mod;
     int id, isFound = 0;
@@ -101,9 +115,9 @@ void delete () {
     }
 
     fclose(fp);
-}
+}*/
 
-MODULES read_record_from_MODULES(FILE *pfile, int index) {
+/*MODULES read_record_from_MODULES(FILE *pfile, int index) {
     // Calculation of the offset at which desired entry should be located from the beginning of the file.
     int offset = index * sizeof(MODULES);
     // Move the position pointer to the calculated offset from the beginning of the file.
@@ -118,15 +132,15 @@ MODULES read_record_from_MODULES(FILE *pfile, int index) {
 
     // Return read record
     return record;
-}
+}*/
 // Function to get file size in bytes.
-int get_file_size_in_bytes(FILE *pfile) {
+/*int get_file_size_in_bytes(FILE *pfile) {
     int size = 0;
     fseek(pfile, 0, SEEK_END);  // Move the position pointer to the end of the file.
     size = ftell(
         pfile);  // Read the number of bytes from the beginning of the file to the current position pointer.
     rewind(pfile);  // For safety reasons, move the position pointer back to the beginning of the file.
     return size;
-}
+}*/
 
-int get_records_count_in_file(FILE *pfile) { return get_file_size_in_bytes(pfile) / sizeof(MODULES); }
+// int get_records_count_in_file(FILE *pfile) { return get_file_size_in_bytes(pfile) / sizeof(MODULES); }
