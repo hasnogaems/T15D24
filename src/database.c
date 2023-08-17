@@ -73,7 +73,7 @@ void update(const char *filename) {
             scanf("%d", &mod.moduleID);
 
             printf("Enter new Name (up to 20 characters):\n");
-            scanf("%s", mod.moduleName);
+            scanf("%1000s", mod.moduleName);
 
             printf("Enter new Memory Level:\n");
             scanf("%d", &mod.memoryLevel);
